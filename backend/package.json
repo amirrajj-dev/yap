@@ -4,9 +4,12 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev" : "bun --watch index.ts",
-    "start" : "bun index.ts",
-    "install" : "bun install"
+    "dev": "bun --watch index.ts",
+    "start": "bun index.ts",
+    "install": "bun install",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "format": "prettier --write ."
   },
   "devDependencies": {
     "@eslint/eslintrc": "3.3.3",
