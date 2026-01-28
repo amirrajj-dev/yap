@@ -3,13 +3,19 @@ import logger from './src/logging/logger';
 import app from './src/app';
 import { ENV } from './src/configs/env';
 import { connectToDb } from './src/db/db';
+import http from 'http';
+import { initializeSocket } from './src/utils/socket';
 
 const PORT = ENV.PORT || 3000;
+
+const server = http.createServer(app);
+
+initializeSocket(server);
 
 const startServer = async () => {
   try {
     await connectToDb();
-    app.listen(PORT, () => {
+    server.listen(PORT, () => {
       logger.info(`server is running on port ${PORT} ⚡️`);
     });
   } catch (error) {
