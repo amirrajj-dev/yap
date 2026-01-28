@@ -9,9 +9,22 @@ import userRoutes from './routes/user.routes';
 import messageRoutes from './routes/message.routes';
 import { clerkMiddleware } from '@clerk/express';
 import { errorMiddleware } from './middlewares/error.middleware';
+import cors from 'cors';
 
 const app = express();
 
+const allowedOrigins = [
+  'http://localhost:8081', // expo mobile
+  'http://localhost:5173', // vite web devs
+  process.env.FRONTEND_URL!, // production
+].filter(Boolean);
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  }),
+);
 app.use(express.json());
 app.use(clerkMiddleware());
 app.use(morgan('dev', { stream: { write: (msg) => logger.http(msg.trim()) } }));
