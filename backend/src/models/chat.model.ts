@@ -12,15 +12,13 @@ const chatSchema = new mongoose.Schema<IChatDocument>(
         required: true,
       },
     ],
-    lastMessage: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'message',
-        default: null,
-      },
-    ],
+    lastMessage: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'message',
+      default: null,
+    },
     lastMessageAt: {
-      type: String,
+      type: Date,
       default: Date.now,
     },
   },
