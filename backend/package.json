@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "bun --watch index.ts",
     "start": "bun index.ts",
-    "install": "bun install",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
     "format": "prettier --write ."
@@ -16,7 +15,6 @@
     "@eslint/js": "9.39.1",
     "@types/bun": "latest",
     "@types/cors": "^2.8.19",
-    "@types/express": "5.0.6",
     "@types/morgan": "^1.9.10",
     "@typescript-eslint/eslint-plugin": "8.48.1",
     "@typescript-eslint/parser": "8.48.1",
@@ -30,6 +28,7 @@
   },
   "dependencies": {
     "@clerk/express": "1.7.60",
+    "@types/express": "5.0.6",
     "cors": "2.8.5",
     "express": "5.2.1",
     "helmet": "^8.1.0",
