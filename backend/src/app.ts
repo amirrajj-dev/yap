@@ -7,10 +7,13 @@ import authRoutes from './routes/auth.routes';
 import chatRoutes from './routes/chat.routes';
 import userRoutes from './routes/user.routes';
 import messageRoutes from './routes/message.routes';
+import { clerkMiddleware } from '@clerk/express';
+import { errorMiddleware } from './middlewares/error.middleware';
 
 const app = express();
 
 app.use(express.json());
+app.use(clerkMiddleware());
 app.use(morgan('dev', { stream: { write: (msg) => logger.http(msg.trim()) } }));
 app.use(
   helmet({
@@ -20,12 +23,14 @@ app.use(
 
 app.get('/api/health', (req: Request, res: Response) => {
   logger.info('Health Check');
-  return res.status(200).json(ApiResponseHelper.success('OK', null, req.url));
+  return res.status(200).json(ApiResponseHelper.success('OK', null, req.path));
 });
 
 app.use('/api/auth', authRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/messages', messageRoutes);
+
+app.use(errorMiddleware);
 
 export default app;
